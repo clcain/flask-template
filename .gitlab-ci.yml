@@ -1,0 +1,17 @@
+stages:
+- build-image
+  
+services:
+  - docker:dind
+  
+variables:
+  DOCKER_DRIVER: overlay
+
+build-image:
+  stage: build-image
+  only:
+  - master
+  script:
+  - docker build . -t $CI_REGISTRY_IMAGE
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker push $CI_REGISTRY_IMAGE
