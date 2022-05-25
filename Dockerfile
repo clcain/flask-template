@@ -13,7 +13,6 @@ RUN a2enmod headers
 
 COPY requirements.txt /var/www/app/
 RUN pip3 install -r /var/www/app/requirements.txt
-
 COPY app /var/www/app
 
 CMD  /usr/sbin/apache2ctl -D FOREGROUND
