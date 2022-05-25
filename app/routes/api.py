@@ -3,9 +3,9 @@ import datetime
 from flask import Blueprint, current_app
 
 api = Blueprint('api', __name__)
-app = current_app
-logger = app.logger
 
 @api.route('/time')
 def get_api_time():
-    return datetime.datetime.now().isoformat()
+    current_time = datetime.datetime.now().isoformat()
+    current_app.logger.debug(f'Current time {current_time}')
+    return current_time
